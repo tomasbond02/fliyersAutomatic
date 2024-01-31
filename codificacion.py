@@ -6,7 +6,7 @@ import textwrap
 
 
 #en esta funcion se compila la imagen
-def imageCreation(texto, fuente, tamanioLetra, image, textColor, x, y, xInt, yInt, maxWidth):
+def imageCreation(texto:str, fuente:str, tamanioLetra:int, image:str, textColor, x:int, y:int, xInt:int, yInt:int, maxWidth:int):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     pil_image = Image.fromarray(image)
     

@@ -47,6 +47,8 @@ def crearMascara(img:str, offset:str):
     
     mascara = enmascarar(img, mascara1)
     
+    return mascara
+    
 
 def cambiarFondo(img:str):
     colorNegro = [0,0,0]

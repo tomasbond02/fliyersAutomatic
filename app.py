@@ -49,26 +49,20 @@ def agregar_texto_a_foto(titulo, nombre, imagen_cara, texto, dia, horario, ubica
     font_size = 18  # Tamaño de fuente deseado
     font = ImageFont.truetype("arial.ttf", font_size)
 
-    posicion_x = 0
-    posicion_y = 0
-
-    # Aplicar escalado y movimiento a los textos
-    posicion_x += posicion_texto[0]
-    posicion_y += posicion_texto[1]
     font_size_texto = int(font_size * escala_texto)
     font_texto = ImageFont.truetype("arial.ttf", font_size_texto)
 
-    draw.text((posicion_x, posicion_y), f"Título: {titulo}", font=font_texto, fill="white")
-    posicion_y += 25
-    draw.text((posicion_x, posicion_y), f"Nombre: {nombre}", font=font_texto, fill="white")
-    posicion_y += 25
-    draw.text((posicion_x, posicion_y), f"Texto: {texto}", font=font_texto, fill="white")
-    posicion_y += 25
-    draw.text((posicion_x, posicion_y), f"Día: {dia}", font=font_texto, fill="white")
-    posicion_y += 25
-    draw.text((posicion_x, posicion_y), f"Horario: {horario}", font=font_texto, fill="white")
-    posicion_y += 25
-    draw.text((posicion_x, posicion_y), f"Ubicación: {ubicacion}", font=font_texto, fill="white")
+    draw.text((30, 20), titulo, font=font_texto, fill="white")
+    
+    draw.text((40, 20), nombre, font=font_texto, fill="white")
+    
+    draw.text((50, 20), texto, font=font_texto, fill="white")
+    
+    draw.text((60, 20), dia, font=font_texto, fill="white")
+    
+    draw.text((70, 20),  horario, font=font_texto, fill="white")
+    
+    draw.text((80, 20), ubicacion, font=font_texto, fill="white")
 
     if imagen_cara:
         imagen_cara_path = os.path.join("public", imagen_cara)
@@ -84,7 +78,7 @@ def agregar_texto_a_foto(titulo, nombre, imagen_cara, texto, dia, horario, ubica
             imagen_cara_circular = recortar_circulo(imagen_cara)
 
             # Pegar la imagen circular en el fondo
-            posición_final = (posicion_x + posicion_cara[0], posicion_y + posicion_cara[1])
+            posición_final = (20 + posicion_cara[0], 20 + posicion_cara[1])
             fondo.paste(imagen_cara_circular, posición_final, imagen_cara_circular)
 
         except FileNotFoundError as e:
@@ -104,12 +98,8 @@ def main():
         posicion_cara = (291, 272)  # Cambia la posición de la imagen de la cara
         escala_cara = 0.5  # Cambia la escala de la imagen de la cara
         posicion_texto = (20, 20)  # Cambia la posición del texto
-        escala_texto = 1.5  # Cambia la escala del texto
+        escala_texto = 5  # Cambia la escala del texto
         agregar_texto_a_foto(titulos[i], nombres[i], imagenes_cara[i], textos[i], dias[i], horarios[i], ubicaciones[i], fondo_path, salida_path, posicion_cara, escala_cara, posicion_texto, escala_texto)
 
 if __name__ == "__main__":
     main()
-    
-    
-    
-    

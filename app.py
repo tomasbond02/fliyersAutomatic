@@ -65,7 +65,7 @@ def agregar_texto_a_foto(titulo, nombre, imagen_cara, texto, dia, horario, ubica
     draw.text((80, 20), ubicacion, font=font_texto, fill="white")
 
     if imagen_cara:
-        imagen_cara_path = os.path.join("public", imagen_cara)
+        imagen_cara_path = os.path.join("imgSpeacker", imagen_cara)
         try:
             imagen_cara = Image.open(imagen_cara_path)
 
@@ -84,10 +84,11 @@ def agregar_texto_a_foto(titulo, nombre, imagen_cara, texto, dia, horario, ubica
         except FileNotFoundError as e:
             print(f"Error al cargar la imagen de cara: {e}")
 
+    salida_path = os.path.join("carpeta_salida", salida_path)
     fondo.save(salida_path)
 def main():
-    data = os.path.join("public", "data.csv")
-    fondo_path = os.path.join("public", "fondo1.jpeg")
+    data = os.path.join( "data.csv")
+    fondo_path = os.path.join("fondo1.jpeg")
 
     mi_diccionario = leer_csv(data)
     titulos, nombres, imagenes_cara, textos, dias, horarios, ubicaciones = ver_data(mi_diccionario)

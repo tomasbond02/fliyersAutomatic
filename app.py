@@ -1,5 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 import csv
+import textwrap
 import os
 
 def leer_csv(nombre_archivo):
@@ -41,28 +42,33 @@ def recortar_circulo(imagen):
     imagen_circular.putalpha(máscara)
     return imagen_circular
 
-def agregar_texto_a_foto(titulo, nombre, imagen_cara, texto, dia, horario, ubicacion, fondo_path, salida_path, posicion_cara, escala_cara, posicion_texto, escala_texto):
+def agregar_texto_a_foto(titulo, nombre, imagen_cara, texto, dia, horario, ubicacion, fondo_path, salida_path, posicion_cara, escala_cara, escala_texto):
     fondo = Image.open(fondo_path)
     draw = ImageDraw.Draw(fondo)
 
     # Cargar un tipo de letra TrueType (TTF) con el tamaño deseado
     font_size = 18  # Tamaño de fuente deseado
-    font = ImageFont.truetype("arial.ttf", font_size)
 
     font_size_texto = int(font_size * escala_texto)
     font_texto = ImageFont.truetype("arial.ttf", font_size_texto)
 
-    draw.text((30, 20), titulo, font=font_texto, fill="white")
+    titulo_wrapped = textwrap.fill(titulo, width=2, break_long_words=False, replace_whitespace=False)
+    draw.text((30, 20), titulo_wrapped, font=font_texto, fill="white")
     
-    draw.text((40, 20), nombre, font=font_texto, fill="white")
+    nombre_wrapped = textwrap.fill(nombre, width=2, break_long_words=False, replace_whitespace=False)
+    draw.text((40, 550), nombre_wrapped, font=font_texto, fill="white")
     
-    draw.text((50, 20), texto, font=font_texto, fill="white")
+    texto_wrapped = textwrap.fill(texto, width=2, break_long_words=False, replace_whitespace=False)
+    draw.text((50, 20), texto_wrapped, font=font_texto, fill="white")
     
-    draw.text((60, 20), dia, font=font_texto, fill="white")
+    dia_wrapped = textwrap.fill(dia, width=2, break_long_words=False, replace_whitespace=False)
+    draw.text((60, 20), dia_wrapped, font=font_texto, fill="white")
+
+    horario_wrapped = textwrap.fill(horario, width=2, break_long_words=False, replace_whitespace=False)
+    draw.text((70, 20),  horario_wrapped, font=font_texto, fill="white")
     
-    draw.text((70, 20),  horario, font=font_texto, fill="white")
-    
-    draw.text((80, 20), ubicacion, font=font_texto, fill="white")
+    ubicacion_wrapped = textwrap.fill(ubicacion, width=2, break_long_words=False, replace_whitespace=False)
+    draw.text((80, 20), ubicacion_wrapped, font=font_texto, fill="white")
 
     if imagen_cara:
         imagen_cara_path = os.path.join("imgSpeacker", imagen_cara)
@@ -86,6 +92,10 @@ def agregar_texto_a_foto(titulo, nombre, imagen_cara, texto, dia, horario, ubica
 
     salida_path = os.path.join("carpeta_salida", salida_path)
     fondo.save(salida_path)
+    
+    
+#######################################################################################################################################
+    
 def main():
     data = os.path.join( "data.csv")
     fondo_path = os.path.join("fondo1.jpeg")
@@ -96,11 +106,10 @@ def main():
     for i in range(len(titulos)):
         salida_path = f"filename_{i + 1}.png"  # Cambié a PNG para soportar transparencia
         # Ajusta estos valores según tus necesidades
-        posicion_cara = (291, 272)  # Cambia la posición de la imagen de la cara
+        posicion_cara = (291, 392)  # Cambia la posición de la imagen de la cara
         escala_cara = 0.5  # Cambia la escala de la imagen de la cara
-        posicion_texto = (20, 20)  # Cambia la posición del texto
         escala_texto = 5  # Cambia la escala del texto
-        agregar_texto_a_foto(titulos[i], nombres[i], imagenes_cara[i], textos[i], dias[i], horarios[i], ubicaciones[i], fondo_path, salida_path, posicion_cara, escala_cara, posicion_texto, escala_texto)
+        agregar_texto_a_foto(titulos[i], nombres[i], imagenes_cara[i], textos[i], dias[i], horarios[i], ubicaciones[i], fondo_path, salida_path, posicion_cara, escala_cara, escala_texto)
 
 if __name__ == "__main__":
     main()

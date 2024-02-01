@@ -3,7 +3,7 @@ import csv
 import textwrap
 import os
 
-def leer_csv(nombre_archivo):
+def leer_csv(nombre_archivo:str):
     diccionario = {}
     with open(nombre_archivo, 'r', newline='', encoding='utf-8') as archivo_csv:
         lector_csv = csv.reader(archivo_csv, delimiter=';')
@@ -22,7 +22,7 @@ def leer_csv(nombre_archivo):
 
     return diccionario
 
-def ver_data(mi_diccionario):
+def ver_data(mi_diccionario:list):
     titulos = mi_diccionario['\ufeffTITULO']
     nombres = mi_diccionario['NOMBRE']
     imagenes_cara = mi_diccionario['IMAGEN CARA']
@@ -30,10 +30,12 @@ def ver_data(mi_diccionario):
     dias = mi_diccionario['DIA']
     horarios = mi_diccionario['HORARIO']
     ubicaciones = mi_diccionario['UBICACION']
+    formato = mi_diccionario['FORMATO']
+    
 
-    return titulos, nombres, imagenes_cara, textos, dias, horarios, ubicaciones
+    return titulos, nombres, imagenes_cara, textos, dias, horarios, ubicaciones, formato
 
-def recortar_circulo(imagen):
+def recortar_circulo(imagen:str):
     tamaño = imagen.size
     máscara = Image.new("L", tamaño, 0)
     dibujo = ImageDraw.Draw(máscara)
@@ -42,7 +44,7 @@ def recortar_circulo(imagen):
     imagen_circular.putalpha(máscara)
     return imagen_circular
 
-def agregar_texto_a_foto(titulo, nombre, imagen_cara, texto, dia, horario, ubicacion, fondo_path, salida_path, posicion_cara, escala_cara, escala_texto):
+def agregar_texto_a_foto(titulo:str, nombre:str, imagen_cara, texto, dia, horario, ubicacion, fondo_path, salida_path, posicion_cara, escala_cara, escala_texto):
     fondo = Image.open(fondo_path)
     draw = ImageDraw.Draw(fondo)
 
@@ -101,14 +103,22 @@ def main():
     fondo_path = os.path.join("fondo1.jpeg")
 
     mi_diccionario = leer_csv(data)
-    titulos, nombres, imagenes_cara, textos, dias, horarios, ubicaciones = ver_data(mi_diccionario)
+    titulos, nombres, imagenes_cara, textos, dias, horarios, ubicaciones, formato = ver_data(mi_diccionario)
 
     for i in range(len(titulos)):
         salida_path = f"filename_{i + 1}.png"  # Cambié a PNG para soportar transparencia
-        # Ajusta estos valores según tus necesidades
-        posicion_cara = (291, 392)  # Cambia la posición de la imagen de la cara
-        escala_cara = 0.5  # Cambia la escala de la imagen de la cara
-        escala_texto = 5  # Cambia la escala del texto
+        if formato[i] == 'historia':
+            # Ajusta estos valores según tus necesidades
+            posicion_cara = (291, 392)  # Cambia la posición de la imagen de la cara
+            escala_cara = 0.5  # Cambia la escala de la imagen de la cara
+            escala_texto = 5  # Cambia la escala del texto
+            print("este formato es de historia")
+        elif formato[i] == 'post':
+            # Ajusta estos valores según tus necesidades
+            posicion_cara = (291, 392)  # Cambia la posición de la imagen de la cara
+            escala_cara = 0.5  # Cambia la escala de la imagen de la cara
+            escala_texto = 5  # Cambia la escala del texto
+            print("este formato es de post")
         agregar_texto_a_foto(titulos[i], nombres[i], imagenes_cara[i], textos[i], dias[i], horarios[i], ubicaciones[i], fondo_path, salida_path, posicion_cara, escala_cara, escala_texto)
 
 if __name__ == "__main__":

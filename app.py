@@ -31,9 +31,10 @@ def ver_data(mi_diccionario:list):
     horarios = mi_diccionario['HORARIO']
     ubicaciones = mi_diccionario['UBICACION']
     formato = mi_diccionario['FORMATO']
+    tipo = mi_diccionario['TIPO']
     
 
-    return titulos, nombres, imagenes_cara, textos, dias, horarios, ubicaciones, formato
+    return titulos, nombres, imagenes_cara, textos, dias, horarios, ubicaciones, formato, tipo
 
 def recortar_circulo(imagen:str):
     tamaño = imagen.size
@@ -44,7 +45,7 @@ def recortar_circulo(imagen:str):
     imagen_circular.putalpha(máscara)
     return imagen_circular
 
-def agregar_texto_a_foto(titulo:str, nombre:str, imagen_cara, texto, dia, horario, ubicacion, fondo_path, salida_path, posicion_cara, escala_cara, escala_texto):
+def agregar_texto_a_foto(titulo:str, nombre:str, imagen_cara, texto, dia, horario, ubicacion, tipo, fondo_path, salida_path, posicion_cara, escala_cara, escala_texto):
     fondo = Image.open(fondo_path)
     draw = ImageDraw.Draw(fondo)
     
@@ -67,6 +68,9 @@ def agregar_texto_a_foto(titulo:str, nombre:str, imagen_cara, texto, dia, horari
     
     ubicacion_wrapped = textwrap.fill(ubicacion, width=19, break_long_words=False, replace_whitespace=False)
     draw.text((300, 1700), ubicacion_wrapped, font=ImageFont.truetype(fuente, int(18 * escala_texto)), fill="black")
+    
+    tipo_wrapped = textwrap.fill(tipo, width=19, break_long_words=False, replace_whitespace=False)
+    draw.text((300, 610), tipo_wrapped, font=ImageFont.truetype(fuente, int(10 * escala_texto)), fill="black",)
 
     if imagen_cara:
         imagen_cara_path = os.path.join("imgSpeacker", imagen_cara)
@@ -99,7 +103,7 @@ def main():
     fondo_path = os.path.join("fondo.jpg")
 
     mi_diccionario = leer_csv(data)
-    titulos, nombres, imagenes_cara, textos, dias, horarios, ubicaciones, formato = ver_data(mi_diccionario)
+    titulos, nombres, imagenes_cara, textos, dias, horarios, ubicaciones, formato, tipo = ver_data(mi_diccionario)
 
     for i in range(len(titulos)):
         salida_path = f"filename_{i + 1}.png"  # Cambié a PNG para soportar transparencia
@@ -115,7 +119,7 @@ def main():
             escala_cara = 0.5  # Cambia la escala de la imagen de la cara
             escala_texto = 5  # Cambia la escala del texto
             print("este formato es de post")
-        agregar_texto_a_foto(titulos[i], nombres[i], imagenes_cara[i], textos[i], dias[i], horarios[i], ubicaciones[i], fondo_path, salida_path, posicion_cara, escala_cara, escala_texto)
+        agregar_texto_a_foto(titulos[i], nombres[i], imagenes_cara[i], textos[i], dias[i], horarios[i], ubicaciones[i], tipo[i], fondo_path, salida_path, posicion_cara, escala_cara, escala_texto)
 
 if __name__ == "__main__":
     main()

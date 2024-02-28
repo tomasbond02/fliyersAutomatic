@@ -47,30 +47,26 @@ def recortar_circulo(imagen:str):
 def agregar_texto_a_foto(titulo:str, nombre:str, imagen_cara, texto, dia, horario, ubicacion, fondo_path, salida_path, posicion_cara, escala_cara, escala_texto):
     fondo = Image.open(fondo_path)
     draw = ImageDraw.Draw(fondo)
-
-    # Cargar un tipo de letra TrueType (TTF) con el tamaño deseado
-    font_size = 18  # Tamaño de fuente deseado
-
-    font_size_texto = int(font_size * escala_texto)
-    font_texto = ImageFont.truetype("arial.ttf", font_size_texto)
-
-    titulo_wrapped = textwrap.fill(titulo, width=2, break_long_words=False, replace_whitespace=False)
-    draw.text((30, 20), titulo_wrapped, font=font_texto, fill="white")
     
-    nombre_wrapped = textwrap.fill(nombre, width=2, break_long_words=False, replace_whitespace=False)
-    draw.text((40, 550), nombre_wrapped, font=font_texto, fill="white")
-    
-    texto_wrapped = textwrap.fill(texto, width=2, break_long_words=False, replace_whitespace=False)
-    draw.text((50, 20), texto_wrapped, font=font_texto, fill="white")
-    
-    dia_wrapped = textwrap.fill(dia, width=2, break_long_words=False, replace_whitespace=False)
-    draw.text((60, 20), dia_wrapped, font=font_texto, fill="white")
+    fuente = "arial.ttf"
 
-    horario_wrapped = textwrap.fill(horario, width=2, break_long_words=False, replace_whitespace=False)
-    draw.text((70, 20),  horario_wrapped, font=font_texto, fill="white")
+    titulo_wrapped = textwrap.fill(titulo, width=10, break_long_words=False, replace_whitespace=False)
+    draw.text((300, 850), titulo_wrapped, font=ImageFont.truetype(fuente, int(27 * escala_texto)), fill="black")
     
-    ubicacion_wrapped = textwrap.fill(ubicacion, width=2, break_long_words=False, replace_whitespace=False)
-    draw.text((80, 20), ubicacion_wrapped, font=font_texto, fill="white")
+    nombre_wrapped = textwrap.fill(nombre, width=10, break_long_words=False, replace_whitespace=False)
+    draw.text((1050, 500), nombre_wrapped, font=ImageFont.truetype(fuente, int(10 * escala_texto)), fill="black")
+    
+    texto_wrapped = textwrap.fill(texto, width=19, break_long_words=False, replace_whitespace=False)
+    draw.text((300, 500), texto_wrapped, font=ImageFont.truetype(fuente, int(10 * escala_texto)), fill="black")
+    
+    dia_wrapped = textwrap.fill(dia, width=20, break_long_words=False, replace_whitespace=False)
+    draw.text((300, 1500), dia_wrapped, font=ImageFont.truetype(fuente, int(18 * escala_texto)), fill="black")
+
+    horario_wrapped = textwrap.fill(horario, width=19, break_long_words=False, replace_whitespace=False)
+    draw.text((300, 1600),  horario_wrapped, font=ImageFont.truetype(fuente, int(18 * escala_texto)), fill="black")
+    
+    ubicacion_wrapped = textwrap.fill(ubicacion, width=19, break_long_words=False, replace_whitespace=False)
+    draw.text((300, 1700), ubicacion_wrapped, font=ImageFont.truetype(fuente, int(18 * escala_texto)), fill="black")
 
     if imagen_cara:
         imagen_cara_path = os.path.join("imgSpeacker", imagen_cara)
@@ -100,7 +96,7 @@ def agregar_texto_a_foto(titulo:str, nombre:str, imagen_cara, texto, dia, horari
     
 def main():
     data = os.path.join( "data.csv")
-    fondo_path = os.path.join("fondo1.jpeg")
+    fondo_path = os.path.join("fondo.jpg")
 
     mi_diccionario = leer_csv(data)
     titulos, nombres, imagenes_cara, textos, dias, horarios, ubicaciones, formato = ver_data(mi_diccionario)
@@ -109,13 +105,13 @@ def main():
         salida_path = f"filename_{i + 1}.png"  # Cambié a PNG para soportar transparencia
         if formato[i] == 'historia':
             # Ajusta estos valores según tus necesidades
-            posicion_cara = (291, 392)  # Cambia la posición de la imagen de la cara
+            posicion_cara = (1000, 50)  # Cambia la posición de la imagen de la cara
             escala_cara = 0.5  # Cambia la escala de la imagen de la cara
             escala_texto = 5  # Cambia la escala del texto
             print("este formato es de historia")
         elif formato[i] == 'post':
             # Ajusta estos valores según tus necesidades
-            posicion_cara = (291, 392)  # Cambia la posición de la imagen de la cara
+            posicion_cara = (350, 50)  # Cambia la posición de la imagen de la cara
             escala_cara = 0.5  # Cambia la escala de la imagen de la cara
             escala_texto = 5  # Cambia la escala del texto
             print("este formato es de post")

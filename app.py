@@ -78,12 +78,25 @@ def separarTitulo(titulo:str):
     # Busca el valor en el diccionario o usa el valor por defecto
     return valor_por_caso.get((numero_palabras, palabras_cumplen_longitud), valor_por_defecto)
 
-def agregar_texto_a_foto_feed(titulo:str, nombre:str, imagen_cara, texto, dia, horario, ubicacion, tipo, fondo_path, salida_path, posicion_cara, escala_cara, escala_texto):
-    fondo = Image.open(fondo_path)
-    draw = ImageDraw.Draw(fondo)
-    
-    fuente = "arial.ttf"
+def crear_carpeta(ruta_carpeta):
+  try:
+    os.makedirs(ruta_carpeta)
+    return True
+  except FileExistsError:
+    return True
+  except Exception as e:
+    print(f"Error al crear la carpeta: {e}")
+    return False
 
+def parametros_feed(draw, titulo, fuente, nombre, texto, dia, horario, ubicacion, tipo):
+    
+    # Ajusta estos valores según tus necesidades
+    fondo_path = os.path.join("fondoFeed.png")
+    posicion_cara = (800, 5)  # Cambia la posición de la imagen de la cara
+    escala_cara = 0.2  # Cambia la escala de la imagen de la cara
+    escala_texto = 4  # Cambia la escala del texto
+    print("este formato es de post")
+    
     titulo_wrapped = textwrap.fill(titulo, width=20, break_long_words=False, replace_whitespace=False)
     draw.text((100, 450), titulo_wrapped, font=ImageFont.truetype(fuente, int(20 * escala_texto)), fill="black")
     
@@ -104,35 +117,16 @@ def agregar_texto_a_foto_feed(titulo:str, nombre:str, imagen_cara, texto, dia, h
     
     tipo_wrapped = textwrap.fill(tipo, width=19, break_long_words=False, replace_whitespace=False)
     draw.text((100, 185), tipo_wrapped, font=ImageFont.truetype(fuente, int(12 * escala_texto)), fill="black",)
-
-    if imagen_cara:
-        imagen_cara_path = os.path.join("imgSpeacker", imagen_cara)
-        try:
-            imagen_cara = Image.open(imagen_cara_path)
-
-            # Escala y mueve la imagen de la cara
-            tamaño_cara_original = imagen_cara.size
-            tamaño_cara = tuple(int(dim * escala_cara) for dim in tamaño_cara_original)
-            imagen_cara = imagen_cara.resize(tamaño_cara)
-
-            # Recortar la imagen en forma circular
-            imagen_cara_circular = recortar_circulo(imagen_cara)
-
-            # Pegar la imagen circular en el fondo
-            posición_final = (20 + posicion_cara[0], 20 + posicion_cara[1])
-            fondo.paste(imagen_cara_circular, posición_final, imagen_cara_circular)
-
-        except FileNotFoundError as e:
-            print(f"Error al cargar la imagen de cara: {e}")
-
-    salida_path = os.path.join("carpeta_salida", salida_path)
-    fondo.save(salida_path)
     
-def agregar_texto_a_foto_historia(titulo:str, nombre:str, imagen_cara, texto, dia, horario, ubicacion, tipo, fondo_path, salida_path, posicion_cara, escala_cara, escala_texto):
-    fondo = Image.open(fondo_path)
-    draw = ImageDraw.Draw(fondo)
+    return fondo_path, posicion_cara, escala_cara
     
-    fuente = "arial.ttf"
+def parametros_historia(draw, titulo, fuente, nombre, texto, dia, horario, ubicacion, tipo):
+    # Ajusta estos valores según tus necesidades
+    fondo_path = os.path.join("fondoHistoria.jpg")
+    posicion_cara = (1000, 150)  # Cambia la posición de la imagen de la cara
+    escala_cara = 0.4  # Cambia la escala de la imagen de la cara
+    escala_texto = 5  # Cambia la escala del texto
+    print("este formato es de historia")
     
     pos_y = separarTitulo(titulo)
 
@@ -156,9 +150,13 @@ def agregar_texto_a_foto_historia(titulo:str, nombre:str, imagen_cara, texto, di
     
     tipo_wrapped = textwrap.fill(tipo, width=19, break_long_words=False, replace_whitespace=False)
     draw.text((300, 610), tipo_wrapped, font=ImageFont.truetype(fuente, int(10 * escala_texto)), fill="black",)
-
-    if imagen_cara:
-        imagen_cara_path = os.path.join("imgSpeacker", imagen_cara)
+    
+    return fondo_path, posicion_cara, escala_cara
+    
+def imagenCara(escala_cara, posicion_cara, fondo, cara):
+    
+    if cara:
+        imagen_cara_path = os.path.join("imgSpeacker", cara)
         try:
             imagen_cara = Image.open(imagen_cara_path)
 
@@ -175,40 +173,41 @@ def agregar_texto_a_foto_historia(titulo:str, nombre:str, imagen_cara, texto, di
             fondo.paste(imagen_cara_circular, posición_final, imagen_cara_circular)
 
         except FileNotFoundError as e:
-            print(f"Error al cargar la imagen de cara: {e}")
+            print(f"Error al cargar la imagen de cara: {e}")           
+    
+def agregar_texto_a_foto(titulo:str, nombre:str, imagen_cara, texto, dia, horario, ubicacion, tipo, salida_path, formato):
+    fuente = "arial.ttf"
+    if formato == 'historia':
+        fondo_path = os.path.join("fondoHistoria.jpg")
+        fondo = Image.open(fondo_path)
+        draw = ImageDraw.Draw(fondo)
+        fondo_path, posicion_cara, escala_cara = parametros_historia(draw, titulo, fuente, nombre, texto, dia, horario, ubicacion, tipo)
+        imagenCara(escala_cara, posicion_cara, fondo, imagen_cara)
+        
+    elif formato == 'post':
+        fondo_path = os.path.join("fondoFeed.png")
+        fondo = Image.open(fondo_path)
+        draw = ImageDraw.Draw(fondo)
 
+        fondo_path, posicion_cara, escala_cara = parametros_feed(draw, titulo, fuente, nombre, texto, dia, horario, ubicacion, tipo)
+        imagenCara(escala_cara, posicion_cara, fondo, imagen_cara)
+        
     salida_path = os.path.join("carpeta_salida", salida_path)
     fondo.save(salida_path)
 #######################################################################################################################################
     
 def main():
     data = os.path.join( "data.csv")
-    fondo_path = os.path.join("fondo.jpg")
+    crear_carpeta("carpeta_salida")
 
     mi_diccionario = leer_csv(data)
     titulos, nombres, imagenes_cara, textos, dias, horarios, ubicaciones, formato, tipo = ver_data(mi_diccionario)
 
     for i in range(len(titulos)):
         salida_path = f"filename_{i + 1}.png"  # Cambié a PNG para soportar transparencia
-        if formato[i] == 'historia':
-            # Ajusta estos valores según tus necesidades
-            fondo_path = os.path.join("fondoHistoria.jpg")
-            posicion_cara = (1000, 50)  # Cambia la posición de la imagen de la cara
-            escala_cara = 0.5  # Cambia la escala de la imagen de la cara
-            escala_texto = 5  # Cambia la escala del texto
-            print("este formato es de historia")
-            agregar_texto_a_foto_historia(titulos[i], nombres[i], imagenes_cara[i], textos[i], dias[i], horarios[i], ubicaciones[i], tipo[i], fondo_path, salida_path, posicion_cara, escala_cara, escala_texto)
-        elif formato[i] == 'post':
-            # Ajusta estos valores según tus necesidades
-            fondo_path = os.path.join("fondoFeed.png")
-            posicion_cara = (790, 10)  # Cambia la posición de la imagen de la cara
-            escala_cara = 0.2  # Cambia la escala de la imagen de la cara
-            escala_texto = 4  # Cambia la escala del texto
-            print("este formato es de post")
-            agregar_texto_a_foto_feed(titulos[i], nombres[i], imagenes_cara[i], textos[i], dias[i], horarios[i], ubicaciones[i], tipo[i], fondo_path, salida_path, posicion_cara, escala_cara, escala_texto)
-    print("el programa se serrara en 60 segundos...")
-    
+        agregar_texto_a_foto(titulos[i], nombres[i], imagenes_cara[i], textos[i], dias[i], horarios[i], ubicaciones[i], tipo[i], salida_path, formato[i])
+    print("el programa se serrara en 10 segundos...")   
 
 if __name__ == "__main__":
     main()
-    time.sleep(60)
+    time.sleep(10)

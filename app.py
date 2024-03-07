@@ -152,7 +152,40 @@ def parametros_historia(draw, titulo, fuente, nombre, texto, dia, horario, ubica
     draw.text((300, 610), tipo_wrapped, font=ImageFont.truetype(fuente, int(10 * escala_texto)), fill="black",)
     
     return fondo_path, posicion_cara, escala_cara
+
+def parametrosDiplomas(draw, titulo, fuente, nombre, texto, dia, horario, ubicacion, tipo):
+    # Ajusta estos valores según tus necesidades
+    fondo_path = os.path.join("Diploma.png")
+    posicion_cara = (1000, 150)  # Cambia la posición de la imagen de la cara
+    escala_cara = 0.4  # Cambia la escala de la imagen de la cara
+    escala_texto = 5  # Cambia la escala del texto
+    print("este formato es de historia")
     
+    pos_y = separarTitulo(titulo)
+
+    titulo_wrapped = textwrap.fill(titulo, width=20, break_long_words=False, replace_whitespace=False)
+    draw.text((1080, 845), titulo_wrapped, font=ImageFont.truetype(fuente, int(7 * escala_texto)), fill="black")
+    
+    nombre_wrapped = textwrap.fill(nombre, width=30, break_long_words=False, replace_whitespace=False)
+    draw.text((200, 600), nombre_wrapped, font=ImageFont.truetype(fuente, int(30 * escala_texto)), fill="black")
+    
+    texto_wrapped = textwrap.fill(texto, width=19, break_long_words=False, replace_whitespace=False)
+    draw.text((300, 500), texto_wrapped, font=ImageFont.truetype(fuente, int(30 * escala_texto)), fill="black")
+    
+    dia_wrapped = textwrap.fill(dia, width=20, break_long_words=False, replace_whitespace=False)
+    draw.text((825, 895), dia_wrapped, font=ImageFont.truetype(fuente, int(7 * escala_texto)), fill="black")
+
+    horario_wrapped = textwrap.fill(horario, width=19, break_long_words=False, replace_whitespace=False)
+    draw.text((915, 895),  horario_wrapped, font=ImageFont.truetype(fuente, int(7 * escala_texto)), fill="black")
+    
+    ubicacion_wrapped = textwrap.fill(ubicacion, width=19, break_long_words=False, replace_whitespace=False)
+    draw.text((300, 700), ubicacion_wrapped, font=ImageFont.truetype(fuente, int(18 * escala_texto)), fill="black")
+    
+    tipo_wrapped = textwrap.fill(tipo, width=19, break_long_words=False, replace_whitespace=False)
+    draw.text((300, 610), tipo_wrapped, font=ImageFont.truetype(fuente, int(10 * escala_texto)), fill="black",)
+    
+    return fondo_path, posicion_cara, escala_cara
+
 def imagenCara(escala_cara, posicion_cara, fondo, cara):
     
     if cara:
@@ -176,8 +209,8 @@ def imagenCara(escala_cara, posicion_cara, fondo, cara):
             print(f"Error al cargar la imagen de cara: {e}")           
     
 def agregar_texto_a_foto(titulo:str, nombre:str, imagen_cara, texto, dia, horario, ubicacion, tipo, salida_path, formato):
-    fuente = "arial.ttf"
     if formato == 'historia':
+        fuente = "arial.ttf"
         fondo_path = os.path.join("fondoHistoria.jpg")
         fondo = Image.open(fondo_path)
         draw = ImageDraw.Draw(fondo)
@@ -185,6 +218,7 @@ def agregar_texto_a_foto(titulo:str, nombre:str, imagen_cara, texto, dia, horari
         imagenCara(escala_cara, posicion_cara, fondo, imagen_cara)
         
     elif formato == 'post':
+        fuente = "arial.ttf"
         fondo_path = os.path.join("fondoFeed.png")
         fondo = Image.open(fondo_path)
         draw = ImageDraw.Draw(fondo)
@@ -192,6 +226,15 @@ def agregar_texto_a_foto(titulo:str, nombre:str, imagen_cara, texto, dia, horari
         fondo_path, posicion_cara, escala_cara = parametros_feed(draw, titulo, fuente, nombre, texto, dia, horario, ubicacion, tipo)
         imagenCara(escala_cara, posicion_cara, fondo, imagen_cara)
         
+    elif formato == 'diploma':
+        fuente = "cmunvi.ttf"
+        fondo_path = os.path.join("Diploma.png")
+        fondo = Image.open(fondo_path)
+        draw = ImageDraw.Draw(fondo)
+
+        fondo_path, posicion_cara, escala_cara = parametrosDiplomas(draw, titulo, fuente, nombre, texto, dia, horario, ubicacion, tipo)
+        imagenCara(escala_cara, posicion_cara, fondo, imagen_cara)
+    
     salida_path = os.path.join("carpeta_salida", salida_path)
     fondo.save(salida_path)
 #######################################################################################################################################
@@ -210,4 +253,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    time.sleep(10)
+    #time.sleep(10)

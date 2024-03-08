@@ -1,0 +1,54 @@
+[
+    {
+        "background_image": "file",
+        "csv":"file",
+        "posicion_cara": {
+            "x":1000,
+            "y":150
+        },
+        "escala_cara": 0.4,
+        "escala_texto":5,
+        "titulo_wrapped": {
+            "x":300,
+            "tamanio_fuente":27,
+            "width":10
+        },
+        "nombre_wrapped": {
+            "x":1050,
+            "y":500,
+            "tamanio_fuente": 10,
+            "width": 10
+        },
+        "texto_wrapped": {
+            "x":300,
+            "y": 500,
+            "tamanio_fuente": 10,
+            "width": 19
+        },
+        "dia_wrapped":{
+            "x": 300,
+            "y": 1500,
+            "tamanio_fuente": 18,
+            "width": 20
+        },
+        "horario_wrapped":{
+            "x": 300,
+            "y": 1600,
+            "tamanio_fuente": 18,
+            "width": 19
+        },
+        "ubicacion_wrapped":{
+            "x": 300,
+            "y": 1700,
+            "tamanio_fuente": 18,
+            "width": 19
+        },
+        "tipo_wrapped":{
+            "x": 300,
+            "y": 610,
+            "tamanio_fuente": 10,
+            "width": 19
+        }
+
+    }
+]

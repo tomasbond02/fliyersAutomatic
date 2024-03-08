@@ -1,14 +1,16 @@
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from fastapi import UploadFile
-from typing import List
+from io import BytesIO, TextIOWrapper
 import csv
 import textwrap
 import os
 
 
+
 def leer_csv_generic(file: UploadFile):
+    file_text_wrapper = TextIOWrapper(file.file, encoding='utf-8')
     diccionario = {}
-    lector_csv = csv.reader(file, delimiter=';')
+    lector_csv = csv.reader(file_text_wrapper, delimiter=';')
 
     # Obtén los encabezados (nombres de las columnas)
     encabezados = next(lector_csv)
@@ -80,7 +82,7 @@ def acomodarTexto(titulo: str):
     # Busca el valor en el diccionario o usa el valor por defecto
     return valor_por_caso.get((numero_palabras, palabras_cumplen_longitud), valor_por_defecto)
 
-def crear_carpeta(ruta_carpeta):
+def crear_carpeta(ruta_carpeta:str):
     try:
         os.makedirs(ruta_carpeta)
         return True
@@ -90,10 +92,12 @@ def crear_carpeta(ruta_carpeta):
         print(f"Error al crear la carpeta: {e}")
         return False
 
-def genericImagenCara(escala_cara, posicion_cara, fondo, cara):
+async def genericImagenCara(escala_cara:float, posicion_cara:int, fondo, cara):
     if cara:
+        print(cara)
         try:
-            imagen_cara = Image.open(cara)
+            contents = await cara.read()
+            imagen_cara = Image.open(BytesIO(contents))
 
             # Escala y mueve la imagen de la cara
             tamaño_cara_original = imagen_cara.size
@@ -112,9 +116,9 @@ def genericImagenCara(escala_cara, posicion_cara, fondo, cara):
         except FileNotFoundError as e:
             print(f"Error al cargar la imagen de cara: {e}")
 
-def genericTemplate(
+async def genericTemplate(
     background_image: UploadFile,
-    speackerImage: List[UploadFile],
+    faces: list[UploadFile],
     csv: UploadFile,
     fuente: str,
     x_posicion_cara: int,
@@ -149,14 +153,13 @@ def genericTemplate(
     tamanio_fuente_tipo: int,
     width_tipo: int,
 ):
-    
-    fondo = Image.open(background_image)
+    contents = await background_image.read()
+    fondo = Image.open(BytesIO(contents))
     draw = ImageDraw.Draw(fondo)#objeto draw
     posicion_cara = (x_posicion_cara, y_posicion_cara)  # Cambia la posición de la imagen de la cara
-
     diccionario=leer_csv_generic(csv)
-    titulos, nombres, speackerImage, textos, dias, horarios, ubicaciones, formato, tipo = ver_data(
-        diccionario)
+    titulos, nombres, speackerImage, textos, dias, horarios, ubicaciones, formato, tipo = ver_data(diccionario)
+    crear_carpeta("carpeta_salida")
     
     for i in range(len(titulos)):    
         pos_y = acomodarTexto(titulos[i])
@@ -192,11 +195,21 @@ def genericTemplate(
             fuente, int(tamanio_fuente_ubicacion * escala_texto)), fill="black")
 
         tipo_wrapped = textwrap.fill(
-            tipo, width=width_tipo, break_long_words=False, replace_whitespace=False)
+            tipo[i], width=width_tipo, break_long_words=False, replace_whitespace=False)
         draw.text((x_tipo_wrapped, y_tipo_wrapped), tipo_wrapped, font=ImageFont.truetype(
             fuente, int(tamanio_fuente_tipo * escala_texto)), fill="black",)
         
-        genericImagenCara(escala_cara, posicion_cara, fondo, speackerImage)
+        FileName = f"filename_{i + 1}.png"
         
-    salida_path = os.path.join("carpeta_salida", salida_path)
-    fondo.save(salida_path)
+        face = None
+        
+        for j in faces:
+            if j.filename == speackerImage[i]:
+                face = j
+            
+        if face is not None:
+            await genericImagenCara(escala_cara, posicion_cara, fondo, face)
+        
+        salida_path = os.path.join("carpeta_salida", FileName)
+        fondo.save(salida_path)
+        return salida_path

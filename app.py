@@ -128,8 +128,7 @@ def parametros_feed(draw, titulo, fuente, nombre, texto, dia, horario, ubicacion
     draw.text((100, 850), ubicacion_wrapped, font=ImageFont.truetype(
         fuente, int(13 * escala_texto)), fill="black")
 
-    tipo_wrapped = textwrap.fill(
-        tipo, width=19, break_long_words=False, replace_whitespace=False)
+    tipo_wrapped = textwrap.fill(tipo, width=19, break_long_words=False, replace_whitespace=False)
     draw.text((100, 185), tipo_wrapped, font=ImageFont.truetype(
         fuente, int(12 * escala_texto)), fill="black",)
 

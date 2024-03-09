@@ -1,0 +1,53 @@
+[
+    {
+        "background_image": "Diploma.png",
+        "csv": "file",
+        "posicion_cara": {
+            "x": 1000,
+            "y": 150
+        },
+        "escala_cara": 0.4,
+        "escala_texto": 5,
+        "titulo_wrapped": {
+            "x": 1080,
+            "tamanio_fuente": 7,
+            "width": 20
+        },
+        "nombre_wrapped": {
+            "x": 200,
+            "y": 600,
+            "tamanio_fuente": 30,
+            "width": 30
+        },
+        "texto_wrapped": {
+            "x": 300,
+            "y": 500,
+            "tamanio_fuente": 30,
+            "width": 19
+        },
+        "dia_wrapped": {
+            "x": 825,
+            "y": 895,
+            "tamanio_fuente": 7,
+            "width": 20
+        },
+        "horario_wrapped": {
+            "x": 915,
+            "y": 895,
+            "tamanio_fuente": 7,
+            "width": 19
+        },
+        "ubicacion_wrapped": {
+            "x": 300,
+            "y": 700,
+            "tamanio_fuente": 18,
+            "width": 19
+        },
+        "tipo_wrapped": {
+            "x": 300,
+            "y": 610,
+            "tamanio_fuente": 10,
+            "width": 19
+        }
+    }
+]

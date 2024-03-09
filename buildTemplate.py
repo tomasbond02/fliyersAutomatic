@@ -1,10 +1,10 @@
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from fastapi import UploadFile
 from io import BytesIO, TextIOWrapper
+import base64
 import csv
 import textwrap
 import os
-
 
 
 def leer_csv_generic(file: UploadFile):
@@ -94,8 +94,8 @@ def crear_carpeta(ruta_carpeta:str):
 
 async def genericImagenCara(escala_cara:float, posicion_cara:int, fondo, cara):
     if cara:
-        print(cara)
         try:
+            cara.file.seek(0)
             contents = await cara.read()
             imagen_cara = Image.open(BytesIO(contents))
 
@@ -115,6 +115,15 @@ async def genericImagenCara(escala_cara:float, posicion_cara:int, fondo, cara):
 
         except FileNotFoundError as e:
             print(f"Error al cargar la imagen de cara: {e}")
+
+def imagenes_a_base64(imagenes):
+    imagenes_base64 = []
+    for imagen in imagenes:
+        with BytesIO() as output:
+            imagen.save(output, format="JPEG")
+            base64_str = base64.b64encode(output.getvalue()).decode()
+            imagenes_base64.append(base64_str)
+    return imagenes_base64
 
 async def genericTemplate(
     background_image: UploadFile,
@@ -154,16 +163,17 @@ async def genericTemplate(
     width_tipo: int,
 ):
     contents = await background_image.read()
-    fondo = Image.open(BytesIO(contents))
-    draw = ImageDraw.Draw(fondo)#objeto draw
     posicion_cara = (x_posicion_cara, y_posicion_cara)  # Cambia la posición de la imagen de la cara
     diccionario=leer_csv_generic(csv)
     titulos, nombres, speackerImage, textos, dias, horarios, ubicaciones, formato, tipo = ver_data(diccionario)
+    responseImages = []
     crear_carpeta("carpeta_salida")
     
-    for i in range(len(titulos)):    
+    
+    for i in range(len(titulos)):
+        fondo = Image.open(BytesIO(contents))
+        draw = ImageDraw.Draw(fondo)#objeto draw
         pos_y = acomodarTexto(titulos[i])
-
         titulo_wrapped = textwrap.fill(
             titulos[i], width=width_titulo, break_long_words=False, replace_whitespace=False)
         draw.text((x_titulo_wrapped, pos_y), titulo_wrapped, font=ImageFont.truetype(
@@ -199,8 +209,6 @@ async def genericTemplate(
         draw.text((x_tipo_wrapped, y_tipo_wrapped), tipo_wrapped, font=ImageFont.truetype(
             fuente, int(tamanio_fuente_tipo * escala_texto)), fill="black",)
         
-        FileName = f"filename_{i + 1}.png"
-        
         face = None
         
         for j in faces:
@@ -210,6 +218,8 @@ async def genericTemplate(
         if face is not None:
             await genericImagenCara(escala_cara, posicion_cara, fondo, face)
         
-        salida_path = os.path.join("carpeta_salida", FileName)
-        fondo.save(salida_path)
-        return salida_path
+        
+        responseImages.append(fondo)
+        
+        
+    return imagenes_a_base64(responseImages)

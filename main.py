@@ -3,7 +3,7 @@ from fastapi import FastAPI, UploadFile, Form, File
 from buildTemplate import genericTemplate
 
 app = FastAPI(
-    timeout=30
+    timeout=60
 )
 
 

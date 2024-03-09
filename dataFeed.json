@@ -1,0 +1,53 @@
+[
+    {
+        "background_image": "fondoFeed.png",
+        "csv": "file",
+        "posicion_cara": {
+            "x": 800,
+            "y": 5
+        },
+        "escala_cara": 0.2,
+        "escala_texto": 4,
+        "titulo_wrapped": {
+            "x": 100,
+            "tamanio_fuente": 20,
+            "width": 20
+        },
+        "nombre_wrapped": {
+            "x": 750,
+            "y": 200,
+            "tamanio_fuente": 10,
+            "width": 10
+        },
+        "texto_wrapped": {
+            "x": 100,
+            "y": 90,
+            "tamanio_fuente": 10,
+            "width": 19
+        },
+        "dia_wrapped": {
+            "x": 100,
+            "y": 750,
+            "tamanio_fuente": 13,
+            "width": 20
+        },
+        "horario_wrapped": {
+            "x": 100,
+            "y": 800,
+            "tamanio_fuente": 13,
+            "width": 19
+        },
+        "ubicacion_wrapped": {
+            "x": 100,
+            "y": 850,
+            "tamanio_fuente": 13,
+            "width": 30
+        },
+        "tipo_wrapped": {
+            "x": 100,
+            "y": 185,
+            "tamanio_fuente": 12,
+            "width": 19
+        }
+    }
+]

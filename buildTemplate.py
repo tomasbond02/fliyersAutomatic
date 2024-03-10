@@ -7,8 +7,9 @@ import textwrap
 import os
 
 
-def leer_csv_generic(file: UploadFile):
-    file_text_wrapper = TextIOWrapper(file.file, encoding='utf-8')
+async def leer_csv_generic(file: UploadFile):
+    file_bytes = await file.read()
+    file_text_wrapper = TextIOWrapper(BytesIO(file_bytes), encoding='utf-8')
     diccionario = {}
     lector_csv = csv.reader(file_text_wrapper, delimiter=';')
 
@@ -119,6 +120,9 @@ async def genericImagenCara(escala_cara:float, posicion_cara:int, fondo, cara):
 def imagenes_a_base64(imagenes):
     imagenes_base64 = []
     for imagen in imagenes:
+        # Convertir la imagen a modo RGB si es RGBA
+        if imagen.mode == "RGBA":
+            imagen = imagen.convert("RGB")
         with BytesIO() as output:
             imagen.save(output, format="JPEG")
             base64_str = base64.b64encode(output.getvalue()).decode()
@@ -164,7 +168,7 @@ async def genericTemplate(
 ):
     contents = await background_image.read()
     posicion_cara = (x_posicion_cara, y_posicion_cara)  # Cambia la posición de la imagen de la cara
-    diccionario=leer_csv_generic(csv)
+    diccionario= await leer_csv_generic(csv)
     titulos, nombres, speackerImage, textos, dias, horarios, ubicaciones, formato, tipo = ver_data(diccionario)
     responseImages = []
     crear_carpeta("carpeta_salida")

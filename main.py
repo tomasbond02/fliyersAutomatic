@@ -1,3 +1,5 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from typing import Union, List, Annotated
 from fastapi import FastAPI, UploadFile, Form, File
 from buildTemplate import genericTemplate
@@ -6,6 +8,14 @@ app = FastAPI(
     timeout=60
 )
 
+# Configurar CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"], 
+)
 
 @app.get("/")
 def read_root():

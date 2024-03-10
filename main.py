@@ -31,8 +31,8 @@ async def generar_imagen(
     background_image: UploadFile,
     faces: Annotated[
         list[UploadFile], File(description="Multiple files as UploadFile")
-    ],
-    csv: UploadFile,
+    ] = [],
+    csv: UploadFile = None,
     fuente:str = Form(""),
     x_posicion_cara: int = Form(0),
     y_posicion_cara: int = Form(0),

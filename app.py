@@ -187,19 +187,17 @@ def parametrosDiplomas(draw, titulo, fuente, nombre, texto, dia, horario, ubicac
     posicion_cara = (1000, 150)  # Cambia la posición de la imagen de la cara
     escala_cara = 0.4  # Cambia la escala de la imagen de la cara
     escala_texto = 5  # Cambia la escala del texto
-    print("este formato es de historia")
-
-    pos_y = separarTitulo(titulo)
+    print("este formato es de diploma")
 
     titulo_wrapped = textwrap.fill(
-        titulo, width=20, break_long_words=False, replace_whitespace=False)
-    draw.text((1080, 845), titulo_wrapped, font=ImageFont.truetype(
+        titulo, width=35, break_long_words=False, replace_whitespace=False)
+    draw.text((775, 925), titulo_wrapped, font=ImageFont.truetype(
         fuente, int(7 * escala_texto)), fill="black")
 
     nombre_wrapped = textwrap.fill(
-        nombre, width=30, break_long_words=False, replace_whitespace=False)
-    draw.text((200, 600), nombre_wrapped, font=ImageFont.truetype(
-        fuente, int(30 * escala_texto)), fill="black")
+        nombre, width=15, break_long_words=False, replace_whitespace=False)
+    draw.text((300, 600), nombre_wrapped, font=ImageFont.truetype(
+        fuente, int(25 * escala_texto)), fill="black")
 
     texto_wrapped = textwrap.fill(
         texto, width=19, break_long_words=False, replace_whitespace=False)
@@ -208,7 +206,7 @@ def parametrosDiplomas(draw, titulo, fuente, nombre, texto, dia, horario, ubicac
 
     dia_wrapped = textwrap.fill(
         dia, width=20, break_long_words=False, replace_whitespace=False)
-    draw.text((825, 895), dia_wrapped, font=ImageFont.truetype(
+    draw.text((770, 995), dia_wrapped, font=ImageFont.truetype(
         fuente, int(7 * escala_texto)), fill="black")
 
     horario_wrapped = textwrap.fill(
@@ -255,7 +253,7 @@ def imagenCara(escala_cara, posicion_cara, fondo, cara):
 def agregar_texto_a_foto(titulo: str, nombre: str, imagen_cara, texto, dia, horario, ubicacion, tipo, salida_path, formato):
     if formato == 'historia':
         fuente = "arial.ttf"
-        fondo_path = os.path.join("fondoHistoria.jpg")
+        fondo_path = os.path.join("fondos/fondoHistoria.jpg")
         fondo = Image.open(fondo_path)
         draw = ImageDraw.Draw(fondo)
         fondo_path, posicion_cara, escala_cara = parametros_historia(
@@ -264,7 +262,7 @@ def agregar_texto_a_foto(titulo: str, nombre: str, imagen_cara, texto, dia, hora
 
     elif formato == 'post':
         fuente = "arial.ttf"
-        fondo_path = os.path.join("fondoFeed.png")
+        fondo_path = os.path.join("fondos/fondoFeed.png")
         fondo = Image.open(fondo_path)
         draw = ImageDraw.Draw(fondo)
 
@@ -274,7 +272,7 @@ def agregar_texto_a_foto(titulo: str, nombre: str, imagen_cara, texto, dia, hora
 
     elif formato == 'diploma':
         fuente = "cmunvi.ttf"
-        fondo_path = os.path.join("Diploma.png")
+        fondo_path = os.path.join("fondos/Diploma.png")
         fondo = Image.open(fondo_path)
         draw = ImageDraw.Draw(fondo)
 

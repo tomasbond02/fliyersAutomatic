@@ -1,11 +1,89 @@
-﻿TITULO;NOMBRE;IMAGEN CARA;TEXTO;DIA;HORARIO;UBICACION;FORMATO;TIPO
-INDUCCION TIERRA;ANA GARCIA DE LA FUENTE;foto cv.jpeg;REUNION CON ALUMNOS;Jueves 7 de Marzo;14hs;Aula Magna, Monserrat;historia;Presenciales
-TRAYECTORIA FORMULA 1;TOMAS BOND;foto cv.jpeg;REUNION CON ALUMNOS;Jueves 7 de Marzo;14hs;Aula Magna, Monserrat;historia;Presenciales
-INDUCCION TIERRA;ANA GARCIA DE LA FUENTE;foto cv.jpeg;REUNION CON ALUMNOS;Jueves 7 de Marzo;14hs;Aula Magna, Monserrat;historia;Presenciales
-TRAYECTORIA FORMULA 1;TOMAS BOND;foto cv.jpeg;REUNION CON ALUMNOS;Jueves 7 de Marzo;14hs;Aula Magna, Monserrat;historia;Presenciales
-INDUCCION TIERRA;ANA GARCIA DE LA FUENTE;foto cv.jpeg;REUNION CON ALUMNOS;Jueves 7 de Marzo;14hs;Aula Magna, Monserrat;historia;Presenciales
-TRAYECTORIA FORMULA 1;TOMAS BOND;foto cv.jpeg;REUNION CON ALUMNOS;Jueves 7 de Marzo;14hs;Aula Magna, Monserrat;historia;Presenciales
-INDUCCION TIERRA;ANA GARCIA DE LA FUENTE;foto cv.jpeg;REUNION CON ALUMNOS;Jueves 7 de Marzo;14hs;Aula Magna, Monserrat;historia;Presenciales
-TRAYECTORIA FORMULA 1;TOMAS BOND;foto cv.jpeg;REUNION CON ALUMNOS;Jueves 7 de Marzo;14hs;Aula Magna, Monserrat;historia;Presenciales
-INDUCCION TIERRA;ANA GARCIA DE LA FUENTE;foto cv.jpeg;REUNION CON ALUMNOS;Jueves 7 de Marzo;14hs;Aula Magna, Monserrat;historia;Presenciales
-TRAYECTORIA FORMULA 1;TOMAS BOND;foto cv.jpeg;REUNION CON ALUMNOS;Jueves 7 de Marzo;14hs;Aula Magna, Monserrat;historia;Presenciales
+﻿TITULO;NOMBRE;IMAGEN CARA;TEXTO;DIA;HORARIO;UBICACION;FORMATO;TIPO;;;
+Introducción al IoT con entorno Arduino y ESP8266;Selles Juan;;;2/2/2024;;;diploma;;;;
+Introducción al IoT con entorno Arduino y ESP8267;Silvestre Ana;;;2/2/2024;;;diploma;;;;
+Introducción al IoT con entorno Arduino y ESP8268;Tolomei Tomas;;;2/2/2024;;;diploma;;;;
+Introducción al IoT con entorno Arduino y ESP8269;Gigante  Juan Miguel;;;2/2/2024;;;diploma;;;;
+Introducción al IoT con entorno Arduino y ESP8270;Perez Plate Patricio;;;2/2/2024;;;diploma;;;;
+Introducción al IoT con entorno Arduino y ESP8271;Roggero Juan Pablo;;;2/2/2024;;;diploma;;;;
+Introducción al IoT con entorno Arduino y ESP8272;Ayala Alan;;;2/2/2024;;;diploma;;;;
+Introducción al IoT con entorno Arduino y ESP8273;Papini Nicolas;;;2/2/2024;;;diploma;;;;
+Introducción al IoT con entorno Arduino y ESP8274;Baston Alejandro;;;2/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Baston, Alejandro;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Bolanca, Santiago;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Castiglione, Carolina;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Cincunegui, Augusto;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Daverio, Alejandro;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Fede, Santiago Tomas;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Ferrari, Pablo Gustavo;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Huberman , Matías Uriel;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Mc Coubrey Lopez Osornio, Facundo;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Oleszkiewicz, Paul;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Pagano, Jonas;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Petrucci, Leandro;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Pirola, Nicolas Daniel;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Pringles, Nicolas Joaquin;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Rosales Porst, Agustín Pablo;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Sanchez, Carlos Alberto;;;15/2/2024;;;diploma;;;;
+Introducción a Normas y Diseño de PCB Para Manufactura;Suarez Rojas, Gustavo;;;15/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Buzzetti, Martin;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Cano, Kevin Cesar;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Castaño, Miguel Angel;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Cegielski, Juan Ignacio;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Corato Pagola , Lucca;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Falak, Isaac Ezequiel;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Gauna, Lourdes Solange;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Giannecchini, Sergio Matias;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Giannotta, Guido;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Gimenez Zalcman, Mariano Nicolas;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Gomez, Thiago David;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Gonzalez Kuck, Nicolas Alejandro;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Jones, Lucas Jeremy;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Jubany, Maximiliano Nicolas;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Litman, Martin Nahuel;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Lozano, Melina Eliana;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;López Casalá, Román;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Mollo Titirico, Alexis Kevin;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Morales Rey, Francisco;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Morinigo, Priscila Liz;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Oleszkiewicz, Paul;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Ortabe Figueroa, Camila María;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Pavlov, Iván Alejandro;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Rosales Porst, Agustín Pablo;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Rossi, Matias;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Salazar Carrasquel, Samuel Arcangel;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Salazar Ventura, Antonella Emilia;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Sanmiguel, Matias Adrian;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Soriano Bertot, Juan Ignacio;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Tirado Farro, Sheyla Nicolle;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Tolomei Wagemans, Tomás Ignacio;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Viezzoli, Danilo;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Villalba, Facundo Luis;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Vinci, Franco Nehuen;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Bernard, Facundo;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Garios Skiba Delfina;;;20/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Alvarez, Santiago Ariel;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Barrios Bouche , Charo;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Baston, Alejandro;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Borda Rojas, Juan Ignacio;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Botana, Agustin;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Cincunegui, Augusto;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Di Napoli, Maximo;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Gigante, Juan Miguel;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Gimenez, Santiago;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Gutierrez, Manuela;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Huberman , Matías;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Masciarelli, Ramiro;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Mc Coubrey Lopez Osornio, Facundo;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Pagano, Jonas;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Papini, Nicolas Santiago;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Pedemonte Sancho, Matias;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Pirola, Nicolás;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Pringles, Nicolas Joaquin;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Rivero Sarmiento, Daniel Alejandro;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Rosales Porst, Agustín Pablo;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Sanchez, Carlos Alberto;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Sandoval, Ignacio;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Stoljenberg, Ivan;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Tognetti, Alejo;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Zappacosta, Matias;;;6/2/2024;;;diploma;;;;
+Taller de Soldadura Electrónica;Batista Thier;;;6/2/2024;;;diploma;;;;

@@ -50,7 +50,7 @@ def recortar_circulo(imagen: str):
     imagen_circular.putalpha(máscara)
     return imagen_circular
 
-def acomodarTexto(titulo: str):
+def acomodarTexto(titulo: str,):
     # Define la longitud mínima de palabra
     longitud_minima = 4
 
@@ -79,6 +79,7 @@ def acomodarTexto(titulo: str):
         (1, False): 950
 
     }
+    # le deberia mandar esta parte por data
 
     # Busca el valor en el diccionario o usa el valor por defecto
     return valor_por_caso.get((numero_palabras, palabras_cumplen_longitud), valor_por_defecto)

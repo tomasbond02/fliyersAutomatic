@@ -34,11 +34,10 @@ def ver_data(mi_diccionario: list):
     textos = mi_diccionario['TEXTO']
     dias = mi_diccionario['DIA']
     horarios = mi_diccionario['HORARIO']
-    ubicaciones = mi_diccionario['UBICACION']
-    formato = mi_diccionario['FORMATO']
+    ubicaciones = mi_diccionario['UBICACION']    
     tipo = mi_diccionario['TIPO']
 
-    return titulos, nombres, imagenes_cara, textos, dias, horarios, ubicaciones, formato, tipo
+    return titulos, nombres, imagenes_cara, textos, dias, horarios, ubicaciones, tipo
 
 def recortar_circulo(imagen: str):
     tamaño = imagen.size
@@ -50,13 +49,12 @@ def recortar_circulo(imagen: str):
     imagen_circular.putalpha(máscara)
     return imagen_circular
 
-def acomodarTexto(titulo: str,):
+def acomodarTexto(titulo: str, format: str):
     # Define la longitud mínima de palabra
     longitud_minima = 4
 
     # Separa el título en palabras
     palabras = titulo.split()
-
     # Cuenta el número de palabras
     numero_palabras = len(palabras)
 
@@ -64,23 +62,53 @@ def acomodarTexto(titulo: str,):
     palabras_cumplen_longitud = all(
         len(palabra) >= longitud_minima for palabra in palabras)
 
-    # Define el valor por defecto
-    valor_por_defecto = None
+    
 
     # Diccionario para mapear el número de palabras y si cumplen la longitud a un valor
-    valor_por_caso = {
-        (4, True): 800,
-        (3, True): 850,
-        (2, True): 900,
-        (1, True): 950,
-        (4, False): 850,
-        (3, False): 900,
-        (2, False): 900,
-        (1, False): 950
+    if format == 'historia':
+        # Define el valor por defecto
+        valor_por_defecto = 800
+        valor_por_caso = {
+            (4, True): 800,
+            (3, True): 850,
+            (2, True): 900,
+            (1, True): 950,
+            (4, False): 850,
+            (3, False): 900,
+            (2, False): 900,
+            (1, False): 950
 
-    }
+        }
+    elif format == 'feed':
+        # Define el valor por defecto
+        valor_por_defecto = 400
+        valor_por_caso = {
+            (4, True): 400,
+            (3, True): 450,
+            (2, True): 500,
+            (1, True): 550,
+            (4, False): 850,
+            (3, False): 900,
+            (2, False): 900,
+            (1, False): 950
+
+        }
+    elif format == 'diploma':
+        # Define el valor por defecto
+        valor_por_defecto = 800
+        valor_por_caso = {
+            (4, True): 800,
+            (3, True): 850,
+            (2, True): 900,
+            (1, True): 950,
+            (4, False): 850,
+            (3, False): 900,
+            (2, False): 900,
+            (1, False): 950
+
+        }
     # le deberia mandar esta parte por data
-
+    print(numero_palabras,palabras_cumplen_longitud)
     # Busca el valor en el diccionario o usa el valor por defecto
     return valor_por_caso.get((numero_palabras, palabras_cumplen_longitud), valor_por_defecto)
 
@@ -166,19 +194,19 @@ async def genericTemplate(
     y_tipo_wrapped: int,
     tamanio_fuente_tipo: int,
     width_tipo: int,
+    format: str
 ):
     contents = await background_image.read()
     posicion_cara = (x_posicion_cara, y_posicion_cara)  # Cambia la posición de la imagen de la cara
     diccionario= await leer_csv_generic(csv)
-    titulos, nombres, speackerImage, textos, dias, horarios, ubicaciones, formato, tipo = ver_data(diccionario)
+    titulos, nombres, speackerImage, textos, dias, horarios, ubicaciones, tipo = ver_data(diccionario)
     responseImages = []
     crear_carpeta("carpeta_salida")
-    
     
     for i in range(len(titulos)):
         fondo = Image.open(BytesIO(contents))
         draw = ImageDraw.Draw(fondo)#objeto draw
-        pos_y = acomodarTexto(titulos[i])
+        pos_y = acomodarTexto(titulos[i], format)
         titulo_wrapped = textwrap.fill(
             titulos[i], width=width_titulo, break_long_words=False, replace_whitespace=False)
         draw.text((x_titulo_wrapped, pos_y), titulo_wrapped, font=ImageFont.truetype(

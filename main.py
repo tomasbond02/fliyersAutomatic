@@ -65,5 +65,6 @@ async def generar_imagen(
     y_tipo_wrapped: int = Form(0),
     tamanio_fuente_tipo: int = Form(0),
     width_tipo: int = Form(0),
+    format: str = Form("")
 ):
-    return await genericTemplate(background_image, faces,csv, fuente, x_posicion_cara, y_posicion_cara, escala_cara, escala_texto, x_titulo_wrapped, tamanio_fuente_titulo, width_titulo, x_nombre_wrapped, y_nombre_wrapped, tamanio_fuente_nombre, width_nombre, x_texto_wrapped, y_texto_wrapped, tamanio_fuente_texto, width_texto, x_dia_wrapped,y_dia_wrapped,tamanio_fuente_dia,width_dia,x_horario_wrapped,y_horario_wrapped,tamanio_fuente_horario,width_horario,x_ubicacion_wrapped, y_ubicacion_wrapped, tamanio_fuente_ubicacion, width_ubicacion, x_tipo_wrapped, y_tipo_wrapped, tamanio_fuente_tipo, width_tipo)
+    return await genericTemplate(background_image, faces,csv, fuente, x_posicion_cara, y_posicion_cara, escala_cara, escala_texto, x_titulo_wrapped, tamanio_fuente_titulo, width_titulo, x_nombre_wrapped, y_nombre_wrapped, tamanio_fuente_nombre, width_nombre, x_texto_wrapped, y_texto_wrapped, tamanio_fuente_texto, width_texto, x_dia_wrapped,y_dia_wrapped,tamanio_fuente_dia,width_dia,x_horario_wrapped,y_horario_wrapped,tamanio_fuente_horario,width_horario,x_ubicacion_wrapped, y_ubicacion_wrapped, tamanio_fuente_ubicacion, width_ubicacion, x_tipo_wrapped, y_tipo_wrapped, tamanio_fuente_tipo, width_tipo, format)
